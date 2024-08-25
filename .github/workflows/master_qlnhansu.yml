@@ -9,27 +9,23 @@ on:
       - master
   workflow_dispatch:
 
-jobs:
+ jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Set up .NET Framework
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.x'
+          dotnet-version: '4.6.1'
+
       - name: Build with dotnet
-        run: dotnet build QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj --configuration Release # Cập nhật đường dẫn đến file .csproj
+        run: dotnet build QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp # Cập nhật đường dẫn đến file .csproj
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -66,4 +62,5 @@ jobs:
           app-name: 'QLNhanSu'
           slot-name: 'Production'
           package: .
-          
+     
+

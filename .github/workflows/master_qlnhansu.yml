@@ -20,7 +20,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
+      - name: Build with dotnet
+        run: dotnet build QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj --configuration Release # Cập nhật đường dẫn đến file .csproj
 
+      - name: dotnet publish
+        run: dotnet publish QuanLyNhanSu/QuanLyNhanSu/QuanLyNhanSu.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp # Cập nhật đường dẫn đến file .csproj
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
